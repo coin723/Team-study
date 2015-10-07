@@ -7,11 +7,6 @@ b = webdriver.Firefox()
 url = "http://www.koreabaseball.com/Record/Etc/HitVsPit.aspx"
 b.get(url)
 
-#pTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherTeam").find_elements_by_tag_name("option")
-
-# for x in xrange(1, 11):
-# 	pTeams[x].click()
-
 def waitToLoad(sel):
 	WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt")))
 	if sel == "pitchers":
@@ -27,8 +22,6 @@ def waitToLoad(sel):
 	elif sel == "table":
 		WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt thead tr th")))
 		WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt tbody tr td")))
-	# elif sel == "table":
-	# 	return
 	return
 
 def assignEle(sel):
@@ -59,42 +52,29 @@ def ifDataExist():
 def concate(str1, str2):
 	return str1 + str2
 
-#print(pTeams[2].get_attribute("value"))
-
 assignEle("pTeams")
 for x in range(1, len(pTeams)):
-	# print(pTeams[x].get_attribute("value"))
 	pTeams[x].click()
 	prepFor("pitchers")
-	# WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt")))
-	# WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlPitcherPlayer")))
-	# pitchers = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherPlayer").find_elements_by_tag_name("option")
-	# pTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherTeam").find_elements_by_tag_name("option")
+
 	for y in range(1, len(pitchers)):
 		pitchers[y].click()
 		prepFor("hTeams")
 		prepFor("pTeams")
-		# print(pitchers[y].get_attribute("value"))
-		# WebDriverWait(b 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlHitterTeam")))
-		# hTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlHitterTeam").find_elements_by_tag_name("option")
+
 		for z in range(1, len(hTeams)):
+
 			if pTeams[x].get_attribute("value") != hTeams[z].get_attribute("value"):
 				hTeams[z].click()
-				# WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt")))
-				# WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlHitterPlayer")))
-				# hTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlHitterTeam").find_elements_by_tag_name("option")
-				# print(hTeams[z].get_attribute("value"))
-				# hitters = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlHitterPlayer").find_elements_by_tag_name("option")
 				prepFor("hitters")
+
 				for w in range(1, len(hitters)):
 					hitters[w].click()
-					# print(hitters[w].get_attribute("value"))
-					# btnSearch = b.find_element_by_css_selector("input#cphContainer_cphContents_btnSearch")
 					prepFor("btnSearch")
 					btnSearch.click()
 					waitToLoad("table")
+
 					if ifDataExist():
-						# print(b.find_element_by_css_selector("table.tData.tt thead tr th a").get_attribute("title"))
 						prepFor("pTeams")
 						prepFor("pitchers")
 						prepFor("hTeams")
@@ -117,41 +97,5 @@ for x in range(1, len(pTeams)):
 					prepFor("hitters")
 				prepFor("hTeams")
 				prepFor("pTeams")
-		prepFor("pitchers")
+			prepFor("pitchers")
 	prepFor("pTeams")
-		# pitchers = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherPlayer").find_elements_by_tag_name("option")
-	# print(pTeams[x].get_attribute("value"))
-# pTeams[1].click()
-# pTeams = b.find_element_by_css_selector("[name='ctl00$ctl00$cphContainer$cphContents$ddlPitcherTeam']").find_elements_by_tag_name("option")
-# pTeams[2].click()
-
-# for pTeam in pTeams:
-# 	pTeam.click()
-# 	pTeams = b.find_element_by_css_selector("[name='ctl00$ctl00$cphContainer$cphContents$ddlPitcherTeam']").find_elements_by_tag_name("option")
-# 	print(pTeam.get_attribute("value"))
-
-	# WebDriverWait(b, 10)
-	# pitchers = b.find_element_by_css_selector("[name='ctl00$ctl00$cphContainer$cphContents$ddlPitcherPlayer']").find_elements_by_tag_name("option")
-	# for pitcher in pitchers:
-	# 	print(pitcher.get_attribute("value"))
-	# WebDriverWait(b, 10)
-
-	# print(pitchers[1].get_attribute("value"))
-	# for hTeam in hTeams:
-	# 	print(hTeam.get_attribute("value"))
-	# 	hTeam.click()
-	# 	WebDriverWait(b, 10)
-	# 	hitters = b.find_element_by_css_selector("[name='ctl00$ctl00$cphContainer$cphContents$ddlHitterPlayer']").find_elements_by_tag_name("option")
-	# 	for pitcher in pitchers:
-	# 		pitcher.click()
-	# 		WebDriverWait(b, 10)
-	# 		for hitter in hitters:
-	# 			hitter.click()
-	# 			srchBtn.click()
-	# 			WebDriverWait(b, 10)
-
-
-
-# print(pTeams[1].get_attribute("value"))
-# pTeams[1].click()
-

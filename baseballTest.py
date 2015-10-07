@@ -107,12 +107,11 @@ for x in range(1, len(pTeams)):
 						tHeads = b.find_elements_by_css_selector("table.tData.tt thead tr th a")
 						tHeadsStr = ""
 						for tHead in tHeads:
-							tHeadsStr = tHeadsStr + tHead.get_attribute("title") + ",	"
+							tHeadsStr = tHeadsStr + tHead.get_attribute("title") + ",\t"
 						tBodies = b.find_elements_by_css_selector("table.tData.tt tbody tr td")
 						tBodiesStr = ""
 						for tBody in tBodies:
-							print(tBody.get_attribute("text"))
-							tBodiesStr = tBodiesStr + tBody.get_attribute("text") + ",	"
+							tBodiesStr = tBodiesStr + tBody.get_attribute("innerHTML") + ",\t"
 						print(tHeadsStr)
 						print(tBodiesStr)
 					prepFor("hitters")

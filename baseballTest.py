@@ -24,6 +24,11 @@ def waitToLoad(sel):
 		WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlHitterTeam")))
 	elif sel == "btnSearch":
 		WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "input#cphContainer_cphContents_btnSearch")))
+	elif sel == "table":
+		WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt thead tr th")))
+		WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt tbody tr td")))
+	# elif sel == "table":
+	# 	return
 	return
 
 def assignEle(sel):
@@ -48,11 +53,17 @@ def prepFor(sel):
 	waitToLoad(sel)
 	assignEle(sel)
 
+def ifDataExist():
+	return b.find_element_by_css_selector("table.tData.tt tbody tr td").get_attribute("colspan") == None
+
+def concate(str1, str2):
+	return str1 + str2
+
 #print(pTeams[2].get_attribute("value"))
 
 assignEle("pTeams")
 for x in range(1, len(pTeams)):
-	print(pTeams[x].get_attribute("value"))
+	# print(pTeams[x].get_attribute("value"))
 	pTeams[x].click()
 	prepFor("pitchers")
 	# WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt")))
@@ -80,7 +91,31 @@ for x in range(1, len(pTeams)):
 					# print(hitters[w].get_attribute("value"))
 					# btnSearch = b.find_element_by_css_selector("input#cphContainer_cphContents_btnSearch")
 					prepFor("btnSearch")
-					# if b.find_element_by_css_selector("table.tData.tt tbody tr td").get_attribute("colspan") != None:
+					btnSearch.click()
+					waitToLoad("table")
+					if ifDataExist():
+						# print(b.find_element_by_css_selector("table.tData.tt thead tr th a").get_attribute("title"))
+						prepFor("pTeams")
+						prepFor("pitchers")
+						prepFor("hTeams")
+						prepFor("hitters")
+						print("[" + pTeams[x].get_attribute("text") + "] " + 
+							pitchers[y].get_attribute("text") + 
+							" vs. " + 
+							"[" + hTeams[z].get_attribute("text") + "] " + 
+							hitters[w].get_attribute("text"))
+						tHeads = b.find_elements_by_css_selector("table.tData.tt thead tr th a")
+						tHeadsStr = ""
+						for tHead in tHeads:
+							tHeadsStr = tHeadsStr + tHead.get_attribute("title") + ",	"
+						tBodies = b.find_elements_by_css_selector("table.tData.tt tbody tr td")
+						tBodiesStr = ""
+						for tBody in tBodies:
+							print(tBody.get_attribute("text"))
+							tBodiesStr = tBodiesStr + tBody.get_attribute("text") + ",	"
+						print(tHeadsStr)
+						print(tBodiesStr)
+					prepFor("hitters")
 				prepFor("hTeams")
 				prepFor("pTeams")
 	prepFor("pTeams")

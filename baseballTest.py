@@ -62,6 +62,7 @@ for x in range(1, len(pTeams)):
 	for y in range(1, len(pitchers)):
 		pitchers[y].click()
 		prepFor("hTeams")
+		prepFor("pTeams")
 		# print(pitchers[y].get_attribute("value"))
 		# WebDriverWait(b 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlHitterTeam")))
 		# hTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlHitterTeam").find_elements_by_tag_name("option")
@@ -80,6 +81,8 @@ for x in range(1, len(pTeams)):
 					# btnSearch = b.find_element_by_css_selector("input#cphContainer_cphContents_btnSearch")
 					prepFor("btnSearch")
 					# if b.find_element_by_css_selector("table.tData.tt tbody tr td").get_attribute("colspan") != None:
+				prepFor("hTeams")
+				prepFor("pTeams")
 	prepFor("pTeams")
 		# pitchers = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherPlayer").find_elements_by_tag_name("option")
 	# print(pTeams[x].get_attribute("value"))

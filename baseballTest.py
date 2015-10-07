@@ -7,7 +7,7 @@ b = webdriver.Firefox()
 url = "http://www.koreabaseball.com/Record/Etc/HitVsPit.aspx"
 b.get(url)
 
-pTeams = b.find_element_by_css_selector("#cphContainer_cphContents_ddlPitcherTeam").find_elements_by_tag_name("option")
+pTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherTeam").find_elements_by_tag_name("option")
 # hTeams = b.find_element_by_css_selector("[name='ctl00$ctl00$cphContainer$cphContents$ddlHitterTeam']").find_elements_by_tag_name("option")
 # btnSearch = b.find_element_by_css_selector("input[type='submit']")
 
@@ -22,7 +22,8 @@ for x in range(1, len(pTeams)):
 	print(pTeams[x].get_attribute("value"))
 	pTeams[x].click()
 	WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt")))
-	pTeams = b.find_element_by_tag_name("select").find_elements_by_tag_name("option")
+	WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlPitcherTeam")))
+	pTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherTeam").find_elements_by_tag_name("option")
 	print(pTeams[x].get_attribute("value"))
 # pTeams[1].click()
 # pTeams = b.find_element_by_css_selector("[name='ctl00$ctl00$cphContainer$cphContents$ddlPitcherTeam']").find_elements_by_tag_name("option")

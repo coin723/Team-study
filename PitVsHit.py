@@ -93,7 +93,7 @@ for x in range(1, len(pTeams)):
 						for tBody in tBodies:
 							tBodiesStr = tBodiesStr + tBody.get_attribute("innerHTML") + ",\t"
 						print(tHeadsStr)
-						print(tBodiesStr)
+						print(tBodiesStr + "\n")
 					prepFor("hitters")
 				prepFor("hTeams")
 				prepFor("pTeams")

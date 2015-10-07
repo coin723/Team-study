@@ -8,7 +8,6 @@ url = "http://www.koreabaseball.com/Record/Etc/HitVsPit.aspx"
 b.get(url)
 
 pTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherTeam").find_elements_by_tag_name("option")
-# hTeams = b.find_element_by_css_selector("[name='ctl00$ctl00$cphContainer$cphContents$ddlHitterTeam']").find_elements_by_tag_name("option")
 # btnSearch = b.find_element_by_css_selector("input[type='submit']")
 
 
@@ -19,12 +18,25 @@ pTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitc
 
 #print(pTeams[2].get_attribute("value"))
 for x in range(1, len(pTeams)):
-	print(pTeams[x].get_attribute("value"))
+	# print(pTeams[x].get_attribute("value"))
 	pTeams[x].click()
 	WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt")))
-	WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlPitcherTeam")))
+	WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlPitcherPlayer")))
+	pitchers = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherPlayer").find_elements_by_tag_name("option")
+	for y in range(1, len(pitchers)):
+		pitchers[y].click()
+		print(pitchers[y].get_attribute("value"))
+		# WebDriverWait(b 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlHitterTeam")))
+		hTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlHitterTeam").find_elements_by_tag_name("option")
+		for z in range(1, len(hTeams)):
+			hTeams[z].click()
+			WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "table.tData.tt")))
+			WebDriverWait(b, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "select#cphContainer_cphContents_ddlHitterTeam")))
+			hTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlHitterTeam").find_elements_by_tag_name("option")
+			print(hTeams[z].get_attribute("value"))
+		pitchers = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherPlayer").find_elements_by_tag_name("option")
 	pTeams = b.find_element_by_css_selector("select#cphContainer_cphContents_ddlPitcherTeam").find_elements_by_tag_name("option")
-	print(pTeams[x].get_attribute("value"))
+	# print(pTeams[x].get_attribute("value"))
 # pTeams[1].click()
 # pTeams = b.find_element_by_css_selector("[name='ctl00$ctl00$cphContainer$cphContents$ddlPitcherTeam']").find_elements_by_tag_name("option")
 # pTeams[2].click()
